@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Name" name="name"><br>
+        <label for="priority">Priority:</label>
+        <input type="text" id="priority" placeholder="Priority" name="priority"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <div class="card">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="banner">
+                    <h2>Task List</h2>
+                    {% for i in obj %}
+                        <div class="task">
+                            <p><strong>{{ i.name }}</strong> -----> {{ i.priority }}</p>
+                            <a href="{% url 'delete' i.id %}">Delete</a>
+                            <a href="{% url 'update' i.id %}">Update</a>
+
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
